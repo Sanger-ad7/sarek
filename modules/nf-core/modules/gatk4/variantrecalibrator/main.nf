@@ -21,6 +21,7 @@ process GATK4_VARIANTRECALIBRATOR {
     tuple val(meta), path("*.idx")     , emit: idx
     tuple val(meta), path("*.tranches"), emit: tranches
     tuple val(meta), path("*plots.R")  , emit: plots, optional:true
+    tuple val(meta), path("*plots.R.pdf")  , emit: pdf, optional:true
     path "versions.yml"                , emit: versions
 
     when:
@@ -45,6 +46,7 @@ process GATK4_VARIANTRECALIBRATOR {
         --tranches-file ${prefix}.tranches \\
         $reference_command \\
         --tmp-dir . \\
+        --rscript-file output.plots.R \\
         $labels_command \\
         $args
 
