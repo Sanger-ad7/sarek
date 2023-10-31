@@ -836,6 +836,7 @@ workflow SAREK {
         ch_input_sample.branch{
                 bam: it[0].data_type == "bam"
                 cram: it[0].data_type == "cram"
+                gvcf: it[0].data_type == "vcf"
             }.set{ch_convert}
 
         //BAM files first must be converted to CRAM files since from this step on we base everything on CRAM format
