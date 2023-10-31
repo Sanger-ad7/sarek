@@ -839,6 +839,7 @@ workflow SAREK {
                 gvcf: it[0].data_type == "vcf"
             }.set{ch_convert}
 
+        ch_gvcf_variant_calling = ch_convert.gvcf
         //BAM files first must be converted to CRAM files since from this step on we base everything on CRAM format
         SAMTOOLS_BAMTOCRAM_VARIANTCALLING(ch_convert.bam, fasta, fasta_fai)
         ch_versions = ch_versions.mix(SAMTOOLS_BAMTOCRAM_VARIANTCALLING.out.versions)

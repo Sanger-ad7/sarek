@@ -5,7 +5,7 @@ include { GATK_SINGLE_SAMPLE_GERMLINE_VARIANT_CALLING as SINGLE_SAMPLE         }
 
 workflow RUN_HAPLOTYPECALLER {
     take:
-    cram                            // channel: [mandatory] [meta, cram, crai, interval.bed]
+    gvcf                            // channel: [mandatory] [meta, cram, crai, interval.bed]
     fasta                           // channel: [mandatory]
     fasta_fai                       // channel: [mandatory]
     dict                            // channel: [mandatory]
@@ -57,7 +57,7 @@ workflow RUN_HAPLOTYPECALLER {
 
 
         JOINT_GERMLINE(
-            genotype_gvcf_to_call,
+            gvcf,
             fasta,
             fasta_fai,
             dict,
