@@ -1302,7 +1302,7 @@ def extract_csv(csv_file) {
             meta.data_type     = 'vcf'
             meta.variantcaller = row.variantcaller ?: ''
 
-            if (params.step == 'annotate') return [meta, vcf]
+            if (params.step == 'annotate' || params.step == 'variant_calling' ) return [meta, vcf]
             else {
                 log.error "Samplesheet contains vcf files but step is `$params.step`. Please check your samplesheet or adjust the step parameter.\nhttps://nf-co.re/sarek/usage#input-samplesheet-configurations"
                 System.exit(1)
