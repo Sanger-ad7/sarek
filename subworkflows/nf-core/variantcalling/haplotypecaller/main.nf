@@ -24,32 +24,32 @@ workflow RUN_HAPLOTYPECALLER {
     merged_vcf = Channel.empty()
     filtered_vcf = Channel.empty()
 
-    HAPLOTYPECALLER(
-        cram,
-        fasta,
-        fasta_fai,
-        dict,
-        dbsnp,
-        dbsnp_tbi)
+    //HAPLOTYPECALLER(
+    //    cram,
+    //    fasta,
+    //    fasta_fai,
+    //    dict,
+    //    dbsnp,
+    //    dbsnp_tbi)
 
     // Figure out if using intervals or no_intervals
-    HAPLOTYPECALLER.out.vcf.branch{
-            intervals:    it[0].num_intervals > 1
-            no_intervals: it[0].num_intervals <= 1
-        }.set{haplotypecaller_vcf_branch}
+    //HAPLOTYPECALLER.out.vcf.branch{
+    //        intervals:    it[0].num_intervals > 1
+    //        no_intervals: it[0].num_intervals <= 1
+    //    }.set{haplotypecaller_vcf_branch}
 
-    HAPLOTYPECALLER.out.tbi.branch{
-            intervals:    it[0].num_intervals > 1
-            no_intervals: it[0].num_intervals <= 1
-        }.set{haplotypecaller_tbi_branch}
+    //HAPLOTYPECALLER.out.tbi.branch{
+    //        intervals:    it[0].num_intervals > 1
+    //        no_intervals: it[0].num_intervals <= 1
+    //    }.set{haplotypecaller_tbi_branch}
 
     if (params.joint_germline) {
         // merge vcf and tbis
-        genotype_gvcf_to_call = Channel.empty().mix(HAPLOTYPECALLER.out.vcf
-                                                    .join(HAPLOTYPECALLER.out.tbi)
-                                                    .join(cram).map{ meta, vcf, tbi, cram, crai, intervals, dragstr_model ->
-                                                            [ meta, vcf, tbi, intervals ]
-                                                    })
+        //genotype_gvcf_to_call = Channel.empty().mix(HAPLOTYPECALLER.out.vcf
+        //                                            .join(HAPLOTYPECALLER.out.tbi)
+        //                                            .join(cram).map{ meta, vcf, tbi, cram, crai, intervals, dragstr_model ->
+        //                                                    [ meta, vcf, tbi, intervals ]
+        //                                            })
         // make channels from labels
         dbsnp_vqsr        = params.dbsnp_vqsr        ? Channel.value(params.dbsnp_vqsr)        : Channel.empty()
         known_indels_vqsr = params.known_indels_vqsr ? Channel.value(params.known_indels_vqsr) : Channel.empty()
