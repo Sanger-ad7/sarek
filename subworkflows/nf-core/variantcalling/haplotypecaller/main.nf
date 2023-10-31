@@ -73,7 +73,7 @@ workflow RUN_HAPLOTYPECALLER {
 
         filtered_vcf = JOINT_GERMLINE.out.genotype_vcf
         ch_versions = ch_versions.mix(JOINT_GERMLINE.out.versions)
-    } // else {
+    }  else {
 
         // Only when using intervals
         MERGE_HAPLOTYPECALLER(
@@ -114,7 +114,7 @@ workflow RUN_HAPLOTYPECALLER {
         ch_versions = ch_versions.mix(  //SINGLE_SAMPLE.out.versions,
                                         HAPLOTYPECALLER.out.versions,
                                         MERGE_HAPLOTYPECALLER.out.versions)
-    // }
+     }
 
     emit:
     versions = ch_versions
