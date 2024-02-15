@@ -74,7 +74,7 @@ params.input_restart = WorkflowSarek.retrieveInput(params, log)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-//include { validateParameters; paramsHelp } from 'plugin/nf-validation'
+include { validateParameters; paramsHelp } from 'plugin/nf-validation'
 
 // Print help message if needed
 if (params.help) {
